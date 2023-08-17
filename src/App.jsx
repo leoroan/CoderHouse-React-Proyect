@@ -3,6 +3,14 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
+const Some = () => <div> algo </div>
+
+function Things() {
+  return (
+    <div> algo más </div>
+  )  
+}
+
 function App() {
   const [count, setCount] = useState(0)
 
