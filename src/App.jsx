@@ -3,14 +3,6 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-const Some = () => <div> algo </div>
-
-function Things() {
-  return (
-    <div> algo más </div>
-  )  
-}
-
 function App() {
   const [count, setCount] = useState(0)
 
@@ -25,8 +17,8 @@ function App() {
         </a>
       </div>
       <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+      <div className="card">  
+        <button className='btn btn-primary' onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
         <p>
