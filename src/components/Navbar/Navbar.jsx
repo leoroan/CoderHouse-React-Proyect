@@ -1,45 +1,31 @@
-// import React from 'react'
-
-// export default function Navbar() {
-//   return (
-//     <div>Navbar</div>
-//   )
-// }
-
-
-
-// import React from 'react'
-
-// function Navbar() {
-//   return (
-//     <div>Navbar</div>
-//   )
-// }
-
-// export default Navbar
-
-
 import React from 'react'
-import PropTypes from 'prop-types'
+import CartWidget from './CartWidget/CartWidget'
 
-function Navbar(props) {
+const Navbar = () => {
   return (
-    <div>Navbar</div>
+    <>
+      <div className="container-fluid">
+        <nav class="navbar col">
+          <span class="navbar-brand mb-0 h1"> 💵 Mis Cuentas </span>
+          <ul className="nav nav-pills">
+            <li className="nav-item">
+              <a className="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#">About</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link disabled" href="#">News</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link ">Contact</a>
+            </li>
+          </ul>
+            <CartWidget cartIcon="bi bi-cart"/>
+        </nav >
+      </div>
+    </>
   )
 }
-
-Navbar.propTypes = {}
 
 export default Navbar
-
-
-// 
-// rfc rfce rafc rafce
-
-import React from 'react'
-
-export const Navbar = () => {
-  return (
-    <div>Navbar</div>
-  )
-}

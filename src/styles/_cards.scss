@@ -1,0 +1,75 @@
+.card {
+  margin: 35px 10px 25px 10px;
+  box-shadow: 2px 2px 4px 2px rgba(253, 253, 253, 0.3), 2px 2px 4px 2px rgba(253, 253, 253, 0.3);
+  border-radius: 15px !important;
+  font-size: 1.25rem;
+  font-weight: 500;
+  padding: 10px 26px 10px 26px !important;
+
+  h5 {
+    font-family: $fontFamilyBody, 'Times New Roman', Times, serif;
+    font-weight: 800 !important;
+  }
+
+}
+
+.form-control {
+
+  &-card {
+    background-color: transparent !important;
+    @extend .form-control;
+    border: 1px solid black !important;
+    border-radius: 15px !important;
+    box-shadow: 2px 1px 2px 1px rgba(253, 253, 253, 0.3) !important;
+    text-align: center;
+  }
+}
+
+.tarjetaPrincipal {
+  min-height: 150px !important;
+  max-height: 500px !important;
+  overflow: scroll;
+  scrollbar-width: thin;
+  /* Oculta las barras de desplazamiento en Firefox */
+  -ms-overflow-style: none;
+
+  p {
+    font-style: italic;
+    font-weight: 700;
+  }
+}
+
+/* Estilos específicos para WebKit (Chrome, Safari, Opera) */
+.tarjetaPrincipal::-webkit-scrollbar {
+  width: 6px;
+}
+
+.tarjetaPrincipal::-webkit-scrollbar-track {
+  background: transparent; 
+}
+
+.tarjetaPrincipal::-webkit-scrollbar-thumb {
+  background-color: #888; 
+  border-radius: 5px; 
+}
+
+
+.hide {
+  display: none !important;
+}
+
+
+#cardResultDisplay {
+  display: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.unMes {
+  
+}
+
