@@ -5,8 +5,8 @@ const Navbar = () => {
   return (
     <>
       <div className="container-fluid">
-        <nav class="navbar col">
-          <span class="navbar-brand mb-0 h1"> 💵 Mis Cuentas </span>
+        <nav className="navbar col">
+          <span className="navbar-brand mb-0 h1"> 💵 Mis Cuentas </span>
           <ul className="nav nav-pills">
             <li className="nav-item">
               <a className="nav-link active" aria-current="page" href="#">Home</a>

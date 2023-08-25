@@ -18,3 +18,10 @@ a {
     background-color: rgb(18, 228, 182) !important;
   }
 }
+
+.active {
+  $gradient-colors: $color10, $color9, $color8, $color7, $color6, $color5, $color4, $color3, $color2, $color1;
+  background: linear-gradient(-45deg, $gradient-colors);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}

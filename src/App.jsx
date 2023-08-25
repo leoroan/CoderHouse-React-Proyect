@@ -7,6 +7,8 @@ import Header from './components/Header/Header'
 function App() {
   const [count, setCount] = useState(0)
 
+  let num = 1
+
   return (
     <>
         <div className="d-flex flex-column justify-content-center vh-100">
@@ -16,9 +18,7 @@ function App() {
           <div className="d-flex flex-column justify-content-center w-100 h-100">
             <div className="cuerpoPpal w-100 h-100">              
               <Header />
-
-              <MainBox card="aca van las cards 🔳 (Desde mi prop)"/>
-
+              <MainBox />
             </div>
           </div>
 

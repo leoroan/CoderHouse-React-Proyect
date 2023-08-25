@@ -418,4 +418,10 @@ a {
 
 .btn-outline-dark:hover {
   background-color: rgb(18, 228, 182) !important;
+}
+
+.active {
+  background: linear-gradient(-45deg, #184E77, #1E6091, #1A759F, #168AAD, #34A0A4, #52B69A, #76C893, #99D98C, #B5E48C, #D9ED92);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
 }/*# sourceMappingURL=index.css.map */
