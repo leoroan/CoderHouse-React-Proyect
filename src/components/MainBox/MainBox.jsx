@@ -36,8 +36,8 @@ const MainBox = props => {
               <div id="cardMes" className="row justify-content-md-center">
 
                 {/* <!-- AQUI SE GENERAN LAS CARDS --> */}
-                {meses.map(mes => (
-                  <Cards mes={mes}/>
+                {meses.map((mes, id,) => (
+                  <Cards key={id} mes={mes}/>
                 ))}
 
               </div>
