@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Cards from '../Cards/Cards';
 
 const MainBox = props => {
   const [meses, setMeses] = useState([]);
@@ -35,14 +36,9 @@ const MainBox = props => {
               <div id="cardMes" className="row justify-content-md-center">
 
                 {/* <!-- AQUI SE GENERAN LAS CARDS --> */}
-
-                <ul>
-                  {meses.map(mes => (
-                    <li key={mes.id}>{mes.nombre}: ${mes.inversion}</li>
-                  ))}
-                </ul>
-
-
+                {meses.map(mes => (
+                  <Cards mes={mes}/>
+                ))}
 
               </div>
             </div>
