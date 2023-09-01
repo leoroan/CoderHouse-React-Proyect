@@ -1,20 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Cards from '../Cards/Cards';
+import useMisMeses from '../Hooks/useMisMeses';
+
 
 const MainBox = props => {
-  const [meses, setMeses] = useState([]);
+  const { misMeses } = props;
 
-  // Primer useEffect: Carga inicial de datos
-  useEffect(() => {
-    fetch('https://64e7a73ab0fd9648b79039ff.mockapi.io/cuentas/mes')
-      .then(response => response.json())
-      .then(data => {
-        setMeses(data);
-      })
-      .catch(error => {
-        console.error('Error fetching investment data:', error);
-      });
-  }, []);
+  
 
   return (
     /* <!-- MAIN BOX START --> */
@@ -36,9 +28,21 @@ const MainBox = props => {
               <div id="cardMes" className="row justify-content-md-center">
 
                 {/* <!-- AQUI SE GENERAN LAS CARDS --> */}
-                {meses.map((mes, id,) => (
+                {/* {meses.map((mes, id,) => (
                   <Cards key={id} mes={mes}/>
-                ))}
+                ))} */}
+                {/* {meses.map((mes, id,) => (
+                  <Cards key={id} mes={mes}/>
+                ))} */}
+                {misMeses && misMeses.length > 0 ? (
+                  // Verifica si misMeses existe y no está vacío antes de mapearlo
+                  misMeses.map((mes, id) => (
+                    <Cards key={id} mes={mes} />
+                  ))
+                ) : (
+                  // Muestra un mensaje o componente de carga mientras se obtienen los datos
+                  <p>Cargando meses...</p>
+                )}
 
               </div>
             </div>
