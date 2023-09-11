@@ -1,55 +1,21 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Navbar from './components/Navbar/Navbar'
 import Footer from './components/Footer/Footer'
 import MainBox from './components/MainBox/MainBox'
-import useMisMeses from './components/Hooks/useMisMeses'
 import About from './components/About/About'
 import News from './components/News/News'
 import Contact from './components/Contact/Contact'
 import CardContainer from './components/CardContainer/CardContainer'
-
-
+import { getMeses } from './components/mockApi';
 
 export default function App() {
-  const { misMeses, agregarMes } = useMisMeses([]);
-
-  class Mes {
-    constructor(id, mes, nombreMes, anio) {
-      this.id = id;
-      this.mes = mes;
-      this.nombre = nombreMes;
-      this.anio = anio;
-      this.inversion = 0;
-      this.retorno = 0;
-    }
-  }
-
-  const handleAgregarMes = (unMes) => {
-    if (unMes) {
-      agregarMes(unMes);
-    }
-  };
-
-  const cargarMeses = () => {
-    const nombresMeses = [
-      'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-      'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre',
-    ];
-    const fechaActual = new Date();
-    for (let i = 0; i < 12; i++) {
-      const mes = fechaActual.getMonth() + 1;
-      const nombreMes = nombresMeses[mes - 1];
-      const id = i;
-      let unMes = new Mes(id, mes, nombreMes, fechaActual.getFullYear());
-      // let unMes = { id, mes, nombreMes, anio: fechaActual.getFullYear() };
-      handleAgregarMes(unMes);
-      fechaActual.setMonth(fechaActual.getMonth() + 1);
-    }
-  };
+  const [misMeses, setMisMeses] = useState([]);
 
   useEffect(() => {
-    cargarMeses();
+    getMeses().then((data) => {
+      setMisMeses(data);
+    });
   }, []);
 
   return (

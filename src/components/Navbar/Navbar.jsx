@@ -7,7 +7,7 @@ const Navbar = () => {
     <>
       <div className="container">
         <nav className="navbar">
-          <span className="navbar-brand mb-0 h1"> 💵 Mis Cuentas </span>
+          <span className="navbar-brand mb-0 h1"> <Link to={"/"}>💵 Mis Cuentas</Link> </span>
 
           <ul className="nav nav-pills nav-fill">
             <li className="nav-item">
