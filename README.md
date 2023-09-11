@@ -21,3 +21,5 @@ Currently, two official plugins are available:
 
 ## CORRER SERVER:.
 * npm run dev
+## SISTEMA DE ROUTER
+* npm i react-router-dom

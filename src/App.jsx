@@ -1,9 +1,13 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar/Navbar'
 import Footer from './components/Footer/Footer'
 import MainBox from './components/MainBox/MainBox'
-import Header from './components/Header/Header'
-import useMisMeses from './components/Hooks/useMisMeses';
+import useMisMeses from './components/Hooks/useMisMeses'
+import About from './components/About/About'
+import News from './components/News/News'
+import Contact from './components/Contact/Contact'
 import { useEffect } from 'react';
+
 
 export default function App() {
   const { misMeses, agregarMes } = useMisMeses([]);
@@ -29,11 +33,11 @@ export default function App() {
     ];
     const fechaActual = new Date();
     for (let i = 0; i < 12; i++) {
-      const mes = fechaActual.getMonth() + 1; // Sumamos 1 para obtener el mes correcto (0 = enero)
+      const mes = fechaActual.getMonth() + 1;
       const nombreMes = nombresMeses[mes - 1];
       let unMes = new Mes(mes, nombreMes, fechaActual.getFullYear())
       handleAgregarMes(unMes);
-      fechaActual.setMonth(fechaActual.getMonth() + 1); // Avanzamos al siguiente mes
+      fechaActual.setMonth(fechaActual.getMonth() + 1);
     }
   };
 
@@ -43,16 +47,16 @@ export default function App() {
 
   return (
     <>
-      <Navbar />
-      <div className="d-flex flex-column justify-content-center vh-100">
-        <div className="d-flex flex-column justify-content-center w-100 h-100">
-          <div className="cuerpoPpal w-100 h-100">
-            <Header />              
-            <MainBox misMeses={misMeses} />
-          </div>
-        </div>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path='/' element={<MainBox misMeses={misMeses} />} />
+          <Route path='/About' element={<About />} />
+          <Route path='/News' element={<News />} />
+          <Route path='/Contact' element={<Contact />} />
+        </Routes>
         <Footer copy="All Rights Reserverd 😂" />
-      </div>
+      </BrowserRouter>
     </>
   )
 }
