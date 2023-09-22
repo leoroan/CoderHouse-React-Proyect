@@ -7,7 +7,7 @@ const misMeses = [
     "anio": 2023,
     "inversionTotal": 0,
     "retorno": 0,
-    "factorRetorno": 1.1,
+    "factorRetorno": 1.1,//esto va a volar
     "inversiones":[]
   },
   {
