@@ -27,7 +27,7 @@ const Navbar = () => {
               <NavLink className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'} to={'/Contact'}> Contact </NavLink>
             </li>
           </ul>
-          <CartWidget cartIcon="bi bi-cart" />
+          {/* <CartWidget cartIcon="bi bi-cart" /> */}
         </nav >
       </div>
     </>
