@@ -27,7 +27,7 @@ export default function App() {
           <Route path='/About' element={<About />} />
           <Route path='/News' element={<News />} />
           <Route path='/Contact' element={<Contact />} />
-          <Route path='/Card/:cid' element={<CardContainer misMeses={misMeses} />} />
+          <Route path='/Card/:cid' element={<CardContainer />} />
         </Routes>
         <Footer copy="All Rights Reserverd 😂" />
       </BrowserRouter>
