@@ -69,7 +69,7 @@ export default () => {
         querySnapshot.forEach((doc) => {
           // Accede a los datos de cada documento y agrega a un array
           inversionesData.push({ id: doc.id, ...doc.data() });
-          
+
         });
         agregarInversiones(inversionesData);
       })
@@ -80,52 +80,60 @@ export default () => {
       <h1> Mis Meses </h1>
       <div className="row">
         <div className="col-6">
-          {cargando ? ( // Verificamos si estamos cargando
-            <p>Cargando datos...</p>
-          ) : (
-            mesActual && (
-              <div>
-                <h2>{mesActual.nombre + ' ' + mesActual.anio}</h2>
-                <h6>Inversion actual: ${mesActual.inversionTotal}</h6>
-                <h6>Retorno actual: ${mesActual.retorno}</h6>
+          <div className="card border-light bg-transparent h-100">
+            {cargando ? ( // Verificamos si estamos cargando
+              <p>Cargando datos...</p>
+            ) : (
+              mesActual && (
+                <div>
+                  <h2>{mesActual.nombre + ' ' + mesActual.anio}</h2>
+                  <h6>Inversion actual: ${mesActual.inversionTotal}</h6>
+                  <h6>Retorno actual: ${mesActual.retorno}</h6>
 
-                {mesActual.inversionTotal > 0 ? (
-                  <h4>Querés invertir más este mes?</h4>
-                ) : (
-                  <h5>Querés empezar a invertir este mes??</h5>
-                )}
+                  {mesActual.inversionTotal > 0 ? (
+                    <h4>Querés invertir más este mes?</h4>
+                  ) : (
+                    <h5>Querés empezar a invertir este mes??</h5>
+                  )}
 
-                <input
-                  className='form-control-card form-control-lg col-6 mx-auto'
-                  id='montoInput'
-                  type='number'
-                  value={valor}
-                  onChange={handleChange}
-                  placeholder='Ingresa un monto a invertir'
-                />
-              </div>
-            )
-          )}
-          <button className='btn btn-outline-light btn-sm' onClick={guardarValor}>
-            Invertir
-          </button>
-          <Link to='/'>
-            <button className='btn btn-outline-dark btn-sm'>Volver</button>
-          </Link>
+                  <input
+                    className='form-control-card form-control-lg col-6 mx-auto m-4'
+                    id='montoInput'
+                    type='number'
+                    value={valor}
+                    onChange={handleChange}
+                    placeholder='monto a invertir'
+                  />
+                </div>
+              )
+            )}
+            <div className="d-grid gap-4 col-6 mx-auto mt-3">
+              <button className='btn btn-success' onClick={guardarValor}>
+                Invertir
+              </button>
+              <Link to='/'>
+                <button className='btn btn-danger'>
+                  Volver
+                </button>
+              </Link>
+            </div>
+          </div>
         </div>
 
-        <div className="col-lg-4">
-          {/* <!-- AQUI SE GENERAN LAS OPCIONES DE INVERSION --> */}
-          {inversiones && inversiones.length > 0 ? (
-            <ul className="row">
-              {inversiones.map((inversion, id) => (
-                <button className='btn btn-outline-dark m-2'key={id}>{inversion.nombre}</button>
-              ))}
-            </ul>
-          ) : (
-            // Muestra un mensaje o componente de carga mientras se obtienen los datos
-            <p>Cargando inversiones...</p>
-          )}
+        <div className="col-6">
+          <div className="row card border-light bg-transparent h-100">
+            {/* <!-- AQUI SE GENERAN LAS OPCIONES DE INVERSION --> */}
+            <h4>Tipos de productos (inversiones)</h4>
+            {inversiones && inversiones.length > 0 ? (
+              <div className="d-grid gap-4 col-6 mx-auto mt-5">
+                {inversiones.map((inversion, id) => (
+                  <button className='btn btn-outline-dark' key={id}>{inversion.nombre.toUpperCase()}</button>
+                ))}
+              </div>
+            ) : (
+              <p>Trayendo inversiones...</p>
+            )}
+          </div>
         </div>
       </div>
     </div>
