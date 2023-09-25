@@ -6,25 +6,54 @@ import { getMesPorId } from '../mockApi';
 export default () => {
   const { cid } = useParams();
   const [mesActual, setMesActual] = useState(null);
-  const [valor, setValor] = useState('');
+  const [valorMontoInput, setValorMontoInput] = useState('');
+  const [valorRetorno, setValorRetorno] = useState('');
   const [cargando, setCargando] = useState(true);
   const [inversiones, setInversiones] = useState([]);
 
-  const handleChange = (e) => {
-    setValor(e.target.value);
+  const handleChangeValorMontoInput = (e) => {
+    setValorMontoInput(e.target.value);
   };
+  const handleChangeValorRetorno = (e) => {
+    setValorRetorno(e.target.value);
+  };
+
+  function handleButtonInversionesClick(inversion) {
+    const existeInversion = mesActual.inversiones.some((item) => item.id === inversion.id);
+
+    if (!existeInversion && !isNaN(parseFloat(valorMontoInput)) && !isNaN(parseFloat(valorRetorno)) && !(inversion.montoMinimo > parseFloat(valorMontoInput))) {
+      const nuevaInversion = {
+        id: inversion.id + Math.floor(Math.random() * (9999 - 9 + 1)) + 9,
+        montoInversion: parseFloat(valorMontoInput),
+        nombre: inversion.nombre,
+        retornoMensual: valorRetorno,
+        tipo: inversion.tipo,
+      };
+      mesActual.inversiones.push(nuevaInversion);
+      console.log('Inversión agregada');
+    } else {
+      console.log('La inversión ya existe en el arreglo o no ingreso un monto válido o no ingresó % retorno ');
+    }
+    console.log('Mes actual:', mesActual);
+  }
 
   const guardarValor = () => {
     if (mesActual) {
-      const nuevoMonto = parseFloat(valor);
-      if (!isNaN(nuevoMonto)) {
-        mesActual.inversionTotal += nuevoMonto;
-        const nuevoRetorno = mesActual.inversionTotal * mesActual.factorRetorno;
-        mesActual.retorno = parseFloat(nuevoRetorno.toFixed(2));
+      const nuevoMonto = parseFloat(valorMontoInput);
+      if (!isNaN(nuevoMonto)) {  // && inversion seleccionada
+        let retornoAcumulado = 0;
+        let totAcumulado = 0;
+        for (const inv of mesActual.inversiones) {
+          totAcumulado += inv.montoInversion;
+          retornoAcumulado += (inv.montoInversion * inv.retornoMensual) / 100;
+        }
+        // const nuevoRetorno = mesActual.inversionTotal * mesActual.factorRetorno;
+        mesActual.inversionTotal = totAcumulado;
+        mesActual.retorno = parseFloat(retornoAcumulado.toFixed(2));
         setMesActual({ ...mesActual });
-        setValor('');
+        setValorMontoInput('');
       } else {
-        alert('Por favor, ingresa un número válido.');
+        alert('Por favor, ingresa un número válido y/o selecicioná un tipo de inversion.');
       }
     }
   };
@@ -78,58 +107,76 @@ export default () => {
   return (
     <div className="container text-center">
       <h1> Mis Meses </h1>
+      {cargando ? (<p>Trayendo la informacion.. </p>) : (<h2>{mesActual.nombre + ' ' + mesActual.anio}</h2>)}
       <div className="row">
         <div className="col-6">
-          <div className="card border-light bg-transparent h-100">
+          <div className="card border-light bg-transparent h-auto">
             {cargando ? ( // Verificamos si estamos cargando
               <p>Cargando datos...</p>
             ) : (
               mesActual && (
                 <div>
-                  <h2>{mesActual.nombre + ' ' + mesActual.anio}</h2>
-                  <h6>Inversion actual: ${mesActual.inversionTotal}</h6>
-                  <h6>Retorno actual: ${mesActual.retorno}</h6>
+                  <h6> Suma total de todas las inversiones realizadas estes mes: ${mesActual.inversionTotal.toFixed(2)}</h6>
+                  <h6>Retorno total (mensual) de todas las inversiones realizadas este mes: ${mesActual.retorno.toFixed(2)}</h6>
 
                   {mesActual.inversionTotal > 0 ? (
-                    <h4>Querés invertir más este mes?</h4>
+                    <h4> Te gustaría seguir invirtiendo más este mes?</h4>
                   ) : (
                     <h5>Querés empezar a invertir este mes??</h5>
                   )}
 
-                  <input
-                    className='form-control-card form-control-lg col-6 mx-auto m-4'
-                    id='montoInput'
-                    type='number'
-                    value={valor}
-                    onChange={handleChange}
-                    placeholder='monto a invertir'
-                  />
+                  <div className="d-grid gap-2 mx-auto m-2">
+                    <input
+                      className='form-control-card form-control-lg col-6 mx-auto m-2'
+                      id='montoInput'
+                      type='number'
+                      value={valorMontoInput}
+                      onChange={handleChangeValorMontoInput}
+                      placeholder='monto a invertir'
+                    />
+
+                    <input
+                      className='form-control-card form-control-lg col-6 mx-auto m-2'
+                      id='retornoInput'
+                      type='number'
+                      value={valorRetorno}
+                      onChange={handleChangeValorRetorno}
+                      placeholder='% retorno actual (mes)'
+                    />
+
+                    <input
+                      className='form-control-card form-control-lg col-6 mx-auto m-2'
+                      id='plazoInput'
+                      type='number'
+                      // value={valorPlazoInput}
+                      // onChange={handleChangePlazoInput}
+                      placeholder='Cantidad en meses'
+                    />
+                  </div>
                 </div>
               )
             )}
-            <div className="d-grid gap-4 col-6 mx-auto mt-3">
-              <button className='btn btn-success' onClick={guardarValor}>
-                Invertir
-              </button>
-              <Link to='/'>
-                <button className='btn btn-danger'>
-                  Volver
-                </button>
-              </Link>
-            </div>
           </div>
         </div>
 
         <div className="col-6">
-          <div className="row card border-light bg-transparent h-100">
+          <div className="row card border-light bg-transparent h-auto">
             {/* <!-- AQUI SE GENERAN LAS OPCIONES DE INVERSION --> */}
             <h4>Tipos de productos (inversiones)</h4>
             {inversiones && inversiones.length > 0 ? (
               <div className="d-grid gap-4 col-6 mx-auto mt-5">
                 {inversiones.map((inversion, id) => (
-                  <button className='btn btn-outline-dark' key={id}>{inversion.nombre.toUpperCase()}</button>
+                  <button className='btn btn-outline-dark' onClick={() => [handleButtonInversionesClick(inversion), guardarValor()]} key={id}>{inversion.nombre.toUpperCase()}</button>
                 ))}
+                <div className='d-flex flex-column'>
+                  <Link to='/'>
+                    <button className='btn btn-danger mb-5  '>
+                      Volver a los meses
+                    </button>
+                  </Link>
+                </div>
               </div>
+
             ) : (
               <p>Trayendo inversiones...</p>
             )}
