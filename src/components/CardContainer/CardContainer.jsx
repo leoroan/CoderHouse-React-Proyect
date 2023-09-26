@@ -71,7 +71,7 @@ export default () => {
       .finally(() => {
         setCargando(false);
       });
-  }, [cid]);
+  }, [cid, getMesPorId(cid)]);
 
   const agregarInversiones = (unArray) => {
     for (const key in unArray) {
@@ -108,6 +108,7 @@ export default () => {
     <div className="container text-center">
       <h1> Mis Meses </h1>
       {cargando ? (<p>Trayendo la informacion.. </p>) : (<h2>{mesActual.nombre + ' ' + mesActual.anio}</h2>)}
+
       <div className="row">
         <div className="col-6">
           <div className="card border-light bg-transparent h-auto">
@@ -183,6 +184,24 @@ export default () => {
           </div>
         </div>
       </div>
+
+      <div className='d-flex h-100'>
+        {mesActual && mesActual.inversiones.length > 0 ? (
+          <div className='card border-light bg-transparent'>
+            <h3>Inversiones realizadas este mes:</h3>
+            <div className="d-flex justify-content-center h-auto">
+              {mesActual.inversiones.map((inversion, index) => (
+                <div className='d-inline-flex p-2 card border-light bg-transparent' key={index}>{inversion.nombre.toUpperCase()} ❌</div>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div className='card border-danger bg-transparent'>
+            <p>No has realizado ninguna inversión aún...</p>
+          </div>
+        )}
+      </div>
+
     </div>
   );
 };
