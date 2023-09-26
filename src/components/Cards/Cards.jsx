@@ -10,7 +10,7 @@ export default ({ mes } = props) => {
             <h4 className="card-title"> {mes.nombre} </h4>
             <h3 className="card-subtitle"> {mes.mes + " " + mes.anio} </h3>
             <p> Inversion este mes: ${mes.inversionTotal} 💵</p>
-            <p> Retorno de inversion este mes: ${mes.retorno} 💵</p>
+            <p> Retorno de inversion esperado, este mes: ${mes.retorno} 💵</p>
           </div>
           <div className="card-footer border-light bg-transparent">
             <Link to={`./Card/${mes.id}`}>

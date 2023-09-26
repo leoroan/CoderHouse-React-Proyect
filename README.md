@@ -1,13 +1,29 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 
+# Consideraciones para entrega final:
+## Qué se pide: 
+* video con el funcionamiento de la app. (50sec aprox.) - en cuenta de esto hacer un deploy 
+ -subirlo a un host gratuito (netlify)
+* Codigo debe estar optimizado
+ - no debe haber codigo comentado
+ - NO console.log()
+ - eliminar el codigo inutil/innecesario
+ - importaciones declaras no usadas / variables.
+* eliminar repetidos
+* diseño modular (modularizacion)
+
+## Libreria externas usadas + su version
+ * bootstrap        | v5.3
+ * Sweet Alert      | v--.-
+ * react-bootstrap  | v
+ * react-router-dom | v
+
+## DEPLOY -DEMO:
+   Link_al_proyecto
+
+
+
+## tips&hints
 # TIPS PARA CREAR UN PROY EN REACT + VITE
 
 ## CREAR EL PROYECTO:
@@ -23,3 +39,6 @@ Currently, two official plugins are available:
 * npm run dev
 ## SISTEMA DE ROUTER
 * npm i react-router-dom
+
+## SISTEMA DE BUILD PARA DEPLOY
+* npm run build
