@@ -40,18 +40,17 @@ export default function YourComponent() {
 
   const eraseInv = (inversion) => {
     if (mesActual && mesActual.inversiones) {
-      // Obtén el índice de la inversión que deseas eliminar
       const index = mesActual.inversiones.indexOf(inversion);
-
-      // Verifica si la inversión existe en el arreglo
       if (index !== -1) {
         mesActual.inversiones.splice(index, 1); // Borra la inversión
-
+        mesActual.inversionTotal -= inversion.montoInversion;
+        mesActual.retorno -= (inversion.montoInversion * inversion.retornoMensual) / 100;
+        setMesActual({ ...mesActual });
         // Si el arreglo de inversiones está vacío, establece inversionTotal en 0
-        if (mesActual.inversiones.length === 0) {
-          mesActual.inversionTotal = 0;
-          mesActual.retorno = 0;
-        }
+        // if (mesActual.inversiones.length === 0) {
+        //   mesActual.inversionTotal = 0;
+        //   mesActual.retorno = 0;
+        // }
       }
     }
   };
@@ -186,7 +185,7 @@ export default function YourComponent() {
         </div>
       </div>
 
-      <div className='d-flex flex-column'>
+      <div className=''>
         <Link to='/'>
           <button className='btn btn-danger mb-5'>
             Volver a tus meses
@@ -200,7 +199,9 @@ export default function YourComponent() {
             <h3>Inversiones realizadas este mes:</h3>
             <div className="d-flex justify-content-center h-auto">
               {mesActual.inversiones.map((inversion, index) => (
-                <button className='d-inline-flex p-2 card border-light bg-transparent' onClick={() => eraseInv(inversion)} key={index}>{inversion.nombre.toUpperCase()} ❌</button>
+                <button className='d-inline-flex p-2 card border-light bg-transparent' onClick={() => eraseInv(inversion)} key={index}>
+                  {[inversion.nombre.toUpperCase(), " invertido: ", inversion.montoInversion]} ❌
+                </button>
               ))}
             </div>
           </div>
