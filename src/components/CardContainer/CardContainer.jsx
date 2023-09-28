@@ -122,7 +122,7 @@ export default function YourComponent() {
 
       <div className="row">
         <div className="col-6">
-          <div className="card border-light bg-transparent h-auto">
+          <div className="card border-light bg-transparent vh-50">
             {cargando ? (
               <p>Cargando datos...</p>
             ) : (
@@ -137,7 +137,7 @@ export default function YourComponent() {
                     <h5>¿Quieres empezar a invertir este mes?</h5>
                   )}
 
-                  <div className="d-grid gap-2 mx-auto m-1">
+                  <div className="d-grid gap-2 mx-auto m-2">
                     <input
                       className='form-control-card form-control-lg col-6 mx-auto m-1'
                       id='montoInput'
@@ -170,10 +170,10 @@ export default function YourComponent() {
         </div>
 
         <div className="col-6 col-ls-12">
-          <div className="row card border-light bg-transparent h-auto">
+          <div className="row card border-light bg-transparent vh-50">
             <h4>Tipos de productos (inversiones) disponibles</h4>
             {inversiones && inversiones.length > 0 ? (
-              <div className="d-grid gap-4 col-6 mx-auto mt-5">
+              <div className="d-grid gap-4 col-6 mx-auto m-3">
                 {inversiones.map((inversion, id) => (
                   <button className='btn btn-outline-dark' onClick={() => [handleButtonInversionesClick(inversion), guardarValor()]} key={id}>{inversion.nombre.toUpperCase()}</button>
                 ))}
@@ -185,9 +185,9 @@ export default function YourComponent() {
         </div>
       </div>
 
-      <div className=''>
+      <div >
         <Link to='/'>
-          <button className='btn btn-danger mb-5'>
+          <button className='btn btn-danger m-2'>
             Volver a tus meses
           </button>
         </Link>
@@ -207,7 +207,7 @@ export default function YourComponent() {
           </div>
         ) : (
           <div className='card border-danger bg-transparent'>
-            <p>No has realizado ninguna inversión aún...</p>
+            <p>No has realizado ninguna inversión aún este mes...</p>
           </div>
         )}
       </div>
