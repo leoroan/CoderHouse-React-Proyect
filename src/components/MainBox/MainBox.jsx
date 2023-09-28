@@ -3,6 +3,8 @@ import Header from '../Header/Header';
 
 export default (props) => {
   const { misMeses } = props;
+
+  
   return (
     <div className="d-flex flex-column justify-content-center vh-100">
       <div className="d-flex flex-column justify-content-center w-100 h-100">

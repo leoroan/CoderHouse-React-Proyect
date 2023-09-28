@@ -12,15 +12,15 @@ export default ({ mes } = props) => {
           <div className="card-body">
             <h4 className="card-title"> {mes.nombre} </h4>
             <h3 className="card-subtitle"> {mes.mes + " " + mes.anio} </h3>
-            <p> 💵 Inversion este mes: ${mes.inversionTotal}</p>
-            <p> 💵 Retorno de inversion esperado, este mes: ${mes.retorno}</p>
+            <p> 💵 Inversion este mes: ${mes.inversionTotal.toFixed(2)}</p>
+            <p> 💵 Retorno de inversion esperado, este mes: ${mes.retorno.toFixed(2)}</p>
           </div>
 
 
           {mes.inversionTotal > 0 ? (
             <div>
               <ul>
-              <p>Invertiste este mes en:</p>
+                <p>Invertiste este mes en:</p>
                 {Array.from(tiposUnicos).map((tipo, index) => (
                   <span className="badge rounded-pill text-bg-info" key={index}>{tipo}</span>
                 ))}

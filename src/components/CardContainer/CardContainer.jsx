@@ -29,6 +29,8 @@ export default function YourComponent() {
         nombre: inversion.nombre,
         retornoMensual: valorRetorno,
         tipo: inversion.tipo,
+        mes: mesActual.mes,
+        anio: mesActual.anio
       };
       mesActual.inversiones.push(nuevaInversion);
       console.log('Inversión agregada');
@@ -198,12 +200,27 @@ export default function YourComponent() {
         {mesActual && mesActual.inversiones.length > 0 ? (
           <div className='card border-light bg-transparent'>
             <h3>Inversiones realizadas este mes:</h3>
-            <div className="d-flex justify-content-center h-auto">
-              {mesActual.inversiones.map((inversion, index) => (
+            <div className="d-flex flex-row justify-content-center h-auto">
+              {/* {mesActual.inversiones.map((inversion, index) => (
                 <button className='d-inline-flex p-2 card border-light bg-transparent' onClick={() => eraseInv(inversion)} key={index}>
                   {[inversion.nombre.toUpperCase(), " invertido: ", inversion.montoInversion]} ❌
                 </button>
-              ))}
+              ))} */}
+              {mesActual.inversiones.map((inversion, index) => {
+                if (inversion.mes === mesActual.mes && inversion.anio === mesActual.anio) {
+                  return (
+                    <p className='d-flex align-items-start border-black bg-transparent no-wrap'>
+                      {[inversion.nombre.toUpperCase(), " invertido: ", inversion.montoInversion]}
+                      <button
+                        type='button'
+                        className='d-flex border-light bg-transparent'
+                        onClick={() => eraseInv(inversion)}
+                        key={index}
+                      >❌</button>
+                    </p>
+                  );
+                }
+              })}
             </div>
           </div>
         ) : (
