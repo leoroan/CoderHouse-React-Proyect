@@ -69,6 +69,7 @@ export default function YourComponent() {
         mesActual.retorno = parseFloat(retornoAcumulado.toFixed(2));
         setMesActual({ ...mesActual });
         setValorMontoInput('');
+        setValorRetorno('');
       } else {
         alert('Por favor, ingresa un número válido y/o selecciona un tipo de inversión.');
       }
