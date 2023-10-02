@@ -30,14 +30,14 @@ export default function YourComponent() {
         retornoMensual: valorRetorno,
         tipo: inversion.tipo,
         mes: mesActual.mes,
-        anio: mesActual.anio
+        anio: mesActual.anio,
+        plazo: inversion.plazo
       };
       mesActual.inversiones.push(nuevaInversion);
       console.log('Inversión agregada');
     } else {
       console.log('La inversión ya existe en el arreglo o no ingresó un monto válido o no ingresó % retorno');
     }
-    console.log('Mes actual:', mesActual);
   }
 
   const eraseInv = (inversion) => {
@@ -178,7 +178,13 @@ export default function YourComponent() {
             {inversiones && inversiones.length > 0 ? (
               <div className="d-grid gap-4 col-6 mx-auto m-3">
                 {inversiones.map((inversion, id) => (
-                  <button className='btn btn-outline-dark' onClick={() => [handleButtonInversionesClick(inversion), guardarValor()]} key={id}>{inversion.nombre.toUpperCase()}</button>
+                  <button
+                    className='btn btn-outline-dark'
+                    onClick={() => [handleButtonInversionesClick(inversion), guardarValor()]}
+                    key={id}
+                  >
+                    {inversion.nombre.toUpperCase() + " - " + inversion.tipo.toUpperCase()}
+                  </button>
                 ))}
               </div>
             ) : (
@@ -206,16 +212,16 @@ export default function YourComponent() {
                   {[inversion.nombre.toUpperCase(), " invertido: ", inversion.montoInversion]} ❌
                 </button>
               ))} */}
-              {mesActual.inversiones.map((inversion, index) => {
+              {mesActual.inversiones.map((inversion, id) => {
                 if (inversion.mes === mesActual.mes && inversion.anio === mesActual.anio) {
                   return (
-                    <p className='d-flex align-items-start border-black bg-transparent no-wrap'>
+                    <p key={id} className='d-flex align-items-start bg-transparent m-2 p-2 border rounded-pill border-2'>
                       {[inversion.nombre.toUpperCase(), " invertido: ", inversion.montoInversion]}
                       <button
                         type='button'
-                        className='d-flex border-light bg-transparent'
+                        className="btn" data-bs-toggle="button"
                         onClick={() => eraseInv(inversion)}
-                        key={index}
+                        
                       >❌</button>
                     </p>
                   );
