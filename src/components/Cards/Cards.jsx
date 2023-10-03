@@ -18,8 +18,8 @@ export default (props) => {
           <div className="card-body">
             <h4 className="card-title"> {miProp.nombre} </h4>
             <h3 className="card-subtitle"> {miProp.mes + " " + miProp.anio} </h3>
-            <p> 💵 Inversion este mes: ${miProp.inversionTotal.toFixed(2)}</p>
-            <p> 💵 Retorno de inversion esperado, este mes: ${miProp.retorno.toFixed(2)}</p>
+            <p> 💵 Invertido este mes: ${miProp.inversionTotal.toFixed(2)}</p>
+            <p> 💵 Retorno de inversion esperado, a fin de mes: ${miProp.retorno.toFixed(2)}</p>
           </div>
 
 
@@ -33,7 +33,7 @@ export default (props) => {
               </ul>
             </div>
           ) : (
-            <p>Aún invertiste nada este mes</p>
+            <p>Aún no invertiste nada este mes</p>
           )}
 
           <div className="card-footer border-light bg-transparent">
