@@ -7,7 +7,6 @@ export default (props) => {
   const tiposUnicos = new Set(inversiones.map(inversion => inversion.tipo));
 
   useEffect(() => {
-    // Este efecto se ejecutará cada vez que propQueRecibo cambie
     setMiProp(props.mes);
   }, [props.mes]);
 

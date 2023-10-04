@@ -126,7 +126,7 @@ export const getMeses = () => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(misMeses);
-    }, 1500); 
+    }, 1200); 
   });
 };
 

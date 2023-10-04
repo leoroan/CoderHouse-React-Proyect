@@ -2,21 +2,26 @@ import React, { useEffect, useState } from 'react';
 import { collection, doc, getDoc, getDocs, getFirestore } from 'firebase/firestore';
 import { useParams, Link } from 'react-router-dom';
 import { getMesPorId } from '../mockApi';
+import useMisMeses from '../Hooks/useMisMeses';
 
 export default function YourComponent() {
   const { cid } = useParams();
   const [mesActual, setMesActual] = useState(null);
   const [valorMontoInput, setValorMontoInput] = useState('');
-  const [valorRetorno, setValorRetorno] = useState('');
   const [cargando, setCargando] = useState(true);
+  const [valorRetorno, setValorRetorno] = useState('');
+  const [valorPlazo, setValorPlazoInput] = useState('');
   const [inversiones, setInversiones] = useState([]);
+  const [inversion, setInversion] = useState(null);
+  const { agregarInversion, borrarInversion } = useMisMeses([]);
 
-  const handleChangeValorMontoInput = (e) => {
-    setValorMontoInput(e.target.value);
+  const handleChange = (e, setterFunction) => {
+    setterFunction(e.target.value);
   };
 
-  const handleChangeValorRetorno = (e) => {
-    setValorRetorno(e.target.value);
+  const handleErase = (inversion) => {
+    setInversion(inversion);
+    borrarInversion(cid, inversion)
   };
 
   function handleButtonInversionesClick(inversion) {
@@ -27,56 +32,21 @@ export default function YourComponent() {
         id: inversion.id + Math.floor(Math.random() * (9999 - 9 + 1)) + 9,
         montoInversion: parseFloat(valorMontoInput),
         nombre: inversion.nombre,
-        retornoMensual: valorRetorno,
+        retornoMensual: Number(valorRetorno),
         tipo: inversion.tipo,
         mes: mesActual.mes,
         anio: mesActual.anio,
-        plazo: inversion.plazo
+        plazo: valorPlazo === "" ? inversion.plazo : valorPlazo
       };
-      mesActual.inversiones.push(nuevaInversion);
-      console.log('Inversión agregada');
+      // mesActual.inversiones.push(nuevaInversion);
+      agregarInversion(cid, nuevaInversion);
+      setValorMontoInput('');
+      setValorRetorno('');
+      setValorPlazoInput('');
     } else {
-      console.log('La inversión ya existe en el arreglo o no ingresó un monto válido o no ingresó % retorno');
+      alert('Por favor, ingresa un número válido y/o selecciona un tipo de inversión.');
     }
   }
-
-  const eraseInv = (inversion) => {
-    if (mesActual && mesActual.inversiones) {
-      const index = mesActual.inversiones.indexOf(inversion);
-      if (index !== -1) {
-        mesActual.inversiones.splice(index, 1); // Borra la inversión
-        mesActual.inversionTotal -= inversion.montoInversion;
-        mesActual.retorno -= (inversion.montoInversion * inversion.retornoMensual) / 100;
-        setMesActual({ ...mesActual });
-        // Si el arreglo de inversiones está vacío, establece inversionTotal en 0
-        // if (mesActual.inversiones.length === 0) {
-        //   mesActual.inversionTotal = 0;
-        //   mesActual.retorno = 0;
-        // }
-      }
-    }
-  };
-
-  const guardarValor = () => {
-    if (mesActual) {
-      const nuevoMonto = parseFloat(valorMontoInput);
-      if (!isNaN(nuevoMonto)) {
-        let retornoAcumulado = 0;
-        let totAcumulado = 0;
-        for (const inv of mesActual.inversiones) {
-          totAcumulado += inv.montoInversion;
-          retornoAcumulado += (inv.montoInversion * inv.retornoMensual) / 100;
-        }
-        mesActual.inversionTotal = totAcumulado;
-        mesActual.retorno = parseFloat(retornoAcumulado.toFixed(2));
-        setMesActual({ ...mesActual });
-        setValorMontoInput('');
-        setValorRetorno('');
-      } else {
-        alert('Por favor, ingresa un número válido y/o selecciona un tipo de inversión.');
-      }
-    }
-  };
 
   useEffect(() => {
     getMesPorId(cid)
@@ -146,7 +116,7 @@ export default function YourComponent() {
                       id='montoInput'
                       type='number'
                       value={valorMontoInput}
-                      onChange={handleChangeValorMontoInput}
+                      onChange={(e) => handleChange(e, setValorMontoInput)}
                       placeholder='Monto a invertir'
                     />
 
@@ -155,7 +125,7 @@ export default function YourComponent() {
                       id='retornoInput'
                       type='number'
                       value={valorRetorno}
-                      onChange={handleChangeValorRetorno}
+                      onChange={(e) => handleChange(e, setValorRetorno)}
                       placeholder='% retorno actual (mes)'
                     />
 
@@ -163,6 +133,8 @@ export default function YourComponent() {
                       className='form-control-card form-control-lg col-6 mx-auto m-1'
                       id='plazoInput'
                       type='number'
+                      value={valorPlazo}
+                      onChange={(e) => handleChange(e, setValorPlazoInput)}
                       placeholder='Cantidad en meses'
                     />
                   </div>
@@ -180,7 +152,7 @@ export default function YourComponent() {
                 {inversiones.map((inversion, id) => (
                   <button
                     className='btn btn-outline-dark'
-                    onClick={() => [handleButtonInversionesClick(inversion), guardarValor()]}
+                    onClick={() => [handleButtonInversionesClick(inversion)]}
                     key={id}
                   >
                     {inversion.nombre.toUpperCase() + " - " + inversion.tipo.toUpperCase()}
@@ -220,8 +192,8 @@ export default function YourComponent() {
                       <button
                         type='button'
                         className="btn" data-bs-toggle="button"
-                        onClick={() => eraseInv(inversion)}
-                        
+                        onClick={() => handleErase(inversion)}
+
                       >❌</button>
                     </p>
                   );

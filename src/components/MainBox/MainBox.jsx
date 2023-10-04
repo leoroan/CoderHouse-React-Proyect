@@ -1,52 +1,8 @@
 import Cards from '../Cards/Cards';
 import Header from '../Header/Header';
-import { useEffect } from 'react';
 
 export default (props) => {
   const { misMeses } = props;
-
-  function distribuirInversiones(misMeses) {
-    const nuevosMeses = [];
-
-    for (let i = 0; i < misMeses.length; i++) {
-      const mesActual = misMeses[i];
-      const inversionesMesActual = mesActual.inversiones;
-
-      // Verificar si el mes actual tiene inversiones
-      if (inversionesMesActual.length > 0) {
-        // Itera a través de las inversiones en el mes actual
-        for (let j = 0; j < inversionesMesActual.length; j++) {
-          const inversionActual = inversionesMesActual[j];
-          const plazoInversion = inversionActual.plazo;
-
-          //   // Distribuir la inversión solo si el plazo es mayor a 0
-          for (let k = 1; k <= plazoInversion; k++) {
-
-            // Verificar si hay meses siguientes disponibles
-            if (i + k < misMeses.length) {
-              const mesSiguiente = misMeses[i + k];
-
-              // Verificar si ya existe una inversión con el mismo ID en el mes siguiente
-              const existeInversion = mesSiguiente.inversiones.some(inv => inv.id === inversionActual.id);
-
-              if (!existeInversion) {
-                mesSiguiente.inversionTotal = Number(mesSiguiente.inversionTotal + inversionActual.montoInversion);
-                mesSiguiente.retorno += (inversionActual.montoInversion * inversionActual.retornoMensual) / 100;
-                inversionActual.plazo--;
-                mesSiguiente.inversiones.push(inversionActual);
-              }
-            }
-          }
-        }
-      }
-    }
-
-    // Después de terminar de procesar todos los meses, agrega los nuevos meses a misMeses
-    // misMeses.push(...nuevosMeses);
-  }
-
-  useEffect(() => {
-  }, [distribuirInversiones(misMeses)]);
 
   return (
     <div className="d-flex flex-column justify-content-center vh-100">
@@ -65,7 +21,7 @@ export default (props) => {
 
             {/* /*  A CARD START */}
             <div className="row row-cols-1  justify-content-md-center" id="cardInicial">
-              <div className="col-md-auto animate__animated animate__bounce">
+              <div className="col-md-auto animate__animated animate__bounce tarjetaPrincipal">
                 <div className="card border-light bg-transparent ">
                   <div className="card-body">
                     <h2 className="card-title"> 💸 </h2>
