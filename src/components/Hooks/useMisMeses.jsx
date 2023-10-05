@@ -10,6 +10,14 @@ export default function useMisMeses() {
     });
   }, []);
 
+  const limpiarMeses = () => {
+    misMeses.forEach((mes, index) => {
+      misMeses[index].inversionTotal = 0;
+      misMeses[index].retorno = 0;
+      misMeses[index].inversiones = [];
+    });
+  }
+
   // +
   const agregarMes = (nuevoMes) => {
     setMisMeses((prevMeses) => [...prevMeses, nuevoMes]);
@@ -112,6 +120,7 @@ export default function useMisMeses() {
     agregarMes,
     eliminarMes,
     agregarInversion,
-    borrarInversion
+    borrarInversion,
+    limpiarMeses
   };
 }

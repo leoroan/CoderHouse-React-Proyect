@@ -7,6 +7,7 @@ import News from './components/News/News'
 import Contact from './components/Contact/Contact'
 import CardContainer from './components/CardContainer/CardContainer'
 import useMisMeses from './components/Hooks/useMisMeses';
+import ResumeContainer from './components/ResumeContainer/ResumeContainer'
 
 export default function App() {
   const { misMeses } = useMisMeses([]); // << mi custom
@@ -21,6 +22,7 @@ export default function App() {
           <Route path='/News' element={<News />} />
           <Route path='/Contact' element={<Contact />} />
           <Route path='/Card/:cid' element={<CardContainer />} />
+          <Route path='/Resume' element={<ResumeContainer misMeses={misMeses} />} />
         </Routes>
         <Footer copy="All Rights Reserverd 😂" />
       </BrowserRouter>

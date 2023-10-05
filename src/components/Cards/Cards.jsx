@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 export default (props) => {
   const [miProp, setMiProp] = useState(props.mes);
@@ -25,7 +25,7 @@ export default (props) => {
           {miProp.inversionTotal > 0 ? (
             <div>
               <ul>
-                <p>🛒? Invertiste este mes en:</p>
+                <p><NavLink className='nav-link' to={'/Resume'}> 🛒 </NavLink> Invertiste este mes en:</p>
                 {Array.from(tiposUnicos).map((tipo, index) => (
                   <span className="badge rounded-pill text-bg-info m-1" key={index}>{tipo}</span>
                 ))}
@@ -39,7 +39,7 @@ export default (props) => {
             <Link to={`./Card/${miProp.id}`}>
               <button className='btn btn-outline-dark btn-sm'>ver más</button>
             </Link>
-          </div>  
+          </div>
         </div>
       </div>
     </>

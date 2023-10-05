@@ -1,7 +1,5 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import CartWidget from './CartWidget/CartWidget'
-
 const Navbar = () => {
   return (
     <>
@@ -27,7 +25,6 @@ const Navbar = () => {
               <NavLink className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'} to={'/Contact'}> Contact </NavLink>
             </li>
           </ul>
-          {/* <CartWidget cartIcon="bi bi-cart" /> */}
         </nav >
       </div>
     </>
