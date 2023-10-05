@@ -3,11 +3,13 @@ import useMisMeses from '../Hooks/useMisMeses';
 
 export default (props) => {
   const { misMeses } = props;
-  const { limpiarMeses } = useMisMeses([]);
+  const { limpiarMeses, borrarInversionPorId } = useMisMeses([]);
   const [mesesConInversiones, setMesesConInversiones] = useState([]);
 
-  const handleErase = (inversion) => {
-    borrarInversion(cid, inversion)
+  const handleErase = (id) => {
+    borrarInversionPorId(id);
+    const mesesConInversiones = misMeses.filter((mes) => mes.inversiones && mes.inversiones.length > 0);
+    setMesesConInversiones(mesesConInversiones);
   };
 
   const borrarTodasLasInversiones = () => {
@@ -37,7 +39,7 @@ export default (props) => {
                       <button
                         type='button'
                         className="btn" data-bs-toggle="button"
-                        onClick={() => handleErase(inversion.id, inversion)}
+                        onClick={() => handleErase(inversion.id)}
                       >❌</button>
                     </li>
                   ))}

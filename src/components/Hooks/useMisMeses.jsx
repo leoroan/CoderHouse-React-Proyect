@@ -112,6 +112,51 @@ export default function useMisMeses() {
     }
   }
 
+  const borrarInversionPorId = (inversionId) => {
+    // Recorremos los meses en busca de la inversión por ID
+    for (let i = 0; i < misMeses.length; i++) {
+      const mesActual = misMeses[i];
+      
+      if (mesActual && mesActual.inversiones) {
+        const index = mesActual.inversiones.findIndex(inversion => inversion.id === inversionId);
+        
+        if (index !== -1) {
+          const inversion = mesActual.inversiones[index];
+          const montoInversion = inversion.montoInversion;
+          const retornoMensual = inversion.retornoMensual;
+  
+          mesActual.inversionTotal -= montoInversion;
+          mesActual.retorno -= (montoInversion * retornoMensual) / 100;
+          mesActual.inversiones.splice(index, 1);
+  
+          // Actualizamos los meses siguientes si es necesario
+          for (let j = i + 1; j < misMeses.length; j++) {
+            const mesSiguiente = misMeses[j];
+            if (mesSiguiente && mesSiguiente.inversiones) {
+              const indexSiguiente = mesSiguiente.inversiones.findIndex(inversion => inversion.id === inversionId);
+              if (indexSiguiente !== -1) {
+                const tipo = inversion.tipo;
+                if (tipo === "Plazo Fijo Cto") {
+                  mesSiguiente.inversiones.splice(indexSiguiente, 1);
+                  mesSiguiente.inversionTotal -= (montoInversion + mesActual.inversionTotal + mesActual.retorno);
+                  mesSiguiente.retorno -= (montoInversion * retornoMensual) / 100;
+                } else {
+                  mesSiguiente.inversiones.splice(indexSiguiente, 1);
+                  mesSiguiente.inversionTotal -= montoInversion;
+                  mesSiguiente.retorno -= (montoInversion * retornoMensual) / 100;
+                }
+              }
+            }
+          }
+          
+          // Terminamos el bucle una vez que hemos encontrado y eliminado la inversión
+          break;
+        }
+      }
+    }
+  };
+  
+
 
 
 
@@ -121,6 +166,7 @@ export default function useMisMeses() {
     eliminarMes,
     agregarInversion,
     borrarInversion,
+    borrarInversionPorId,
     limpiarMeses
   };
 }
