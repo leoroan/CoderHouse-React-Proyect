@@ -24,7 +24,7 @@ export default (props) => {
   const borrarTodasLasInversiones = () => {
     limpiarMeses();
     setMesesConInversiones([]);
-    alert("todo borrado");
+    alert("Todo lo que invertiste fue borrado 😪");
   };
 
   const handleOnChange = (e) => {

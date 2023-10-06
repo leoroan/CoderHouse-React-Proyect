@@ -93,6 +93,47 @@ export default function YourComponent() {
         <h2>{mesActual.nombre + ' ' + mesActual.anio}</h2>
       )}
 
+      {/* <!-- Modal --> */}
+      <div className="modal fade" id="modal_ayuda_main" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="modal_ayuda_main" aria-hidden="true">
+        <div className="modal-dialog">
+          <div className="modal-content card bg-info-subtle">
+            <div className="modal-header bg-info-subtle">
+              <h1 className="modal-title fs-5" id="staticBackdropLabel">Muy inteligente!💡</h1>
+              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div className="modal-body">
+              <ul className='list-group'>
+                <li className='fs-6 list-group-item border border-black border-2 rounded m-2'>
+                  <p>1️⃣ Tu primer paso sería ingresar un monto a invertir. Ten en cuenta que para los plazos, el mínimo es de $1000 y para FCI $1500.</p>
+                </li>
+                <li className='fs-6 list-group-item border border-black border-2 rounded m-2'>
+                  <p>2️⃣ Luego, debes ingresar un porcentaje de retorno, que es lo que la entidad te devuelve por estacionar tu dinero en el plazo que establezcas a continuación.</p>
+                </li>
+                <li className='fs-6 list-group-item border border-black border-2 rounded m-2'>
+                  <p>3️⃣ No olvides poner la cantidad de meses que vas a realizar esta inversión.</p>
+                  <p>💡 Tip: Si lo dejas en blanco, cada producto tiene su valor por defecto.</p>
+                </li>
+                <li className='fs-6 list-group-item border border-black border-2 rounded m-2'>
+                  <p>4️⃣ ¡Listo! Una vez que hayas completado con los datos, solo debes seleccionar un producto de la lista de la derecha.</p>
+                </li>
+                <li className='fs-6 list-group-item border border-black border-2 rounded m-2'>
+                  <p>5️⃣ Debajo podrás ver las inversiones para el mes actual y borrarlas si así lo deseas.</p>
+                </li>
+              </ul>
+
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-outline-success" data-bs-dismiss="modal">ok!👍</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* <!-- Button trigger modal --> */}
+      <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_ayuda_main">
+        Ayuda!🏳
+      </button>
+
       <div className="row">
         <div className="col-6">
           <div className="card border-light bg-transparent vh-50">
@@ -149,15 +190,17 @@ export default function YourComponent() {
             <h4>Tipos de productos (inversiones) disponibles</h4>
             {inversiones && inversiones.length > 0 ? (
               <div className="d-grid gap-4 col-6 mx-auto m-3">
-                {inversiones.map((inversion, id) => (
-                  <button
-                    className='btn btn-outline-dark'
-                    onClick={() => [handleButtonInversionesClick(inversion)]}
-                    key={id}
-                  >
-                    {inversion.nombre.toUpperCase() + " - " + inversion.tipo.toUpperCase()}
-                  </button>
-                ))}
+                {inversiones
+                  .filter((inversion) => inversion.estado === true)
+                  .map((inversion, id) => (
+                    <button
+                      className='btn btn-outline-dark'
+                      onClick={() => [handleButtonInversionesClick(inversion)]}
+                      key={id}
+                    >
+                      💰{inversion.nombre.toUpperCase() + " - " + inversion.tipo.toUpperCase()}
+                    </button>
+                  ))}
               </div>
             ) : (
               <p>Trayendo inversiones...</p>
