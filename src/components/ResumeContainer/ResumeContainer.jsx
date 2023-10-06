@@ -75,14 +75,14 @@ export default (props) => {
       const resumeCollection = collection(queryDB, 'resumes');
       addDoc(resumeCollection, resumen)
         .then(({ id }) => setId(id))
-        .catch(error => console.log(error))
+        .catch(error => console.alert(error))
         .finally(() => {
           setDataForm({
             name: "", phone: "", email: ""
           })
         })
     } else {
-      console.log('Formulario no válido. No se enviará el resumen.');
+      console.warn('Formulario no válido. No se enviará el resumen.');
     }
     limpiarMeses();
     setMesesConInversiones([]);

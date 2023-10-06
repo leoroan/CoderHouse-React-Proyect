@@ -24,6 +24,11 @@ export default function YourComponent() {
     borrarInversion(cid, inversion)
   };
 
+  /**
+   * Agrega una inversión si se cumplen ciertos criterios de validación.
+   *
+   * @param {Object} inversion - la inversión seleccionada.
+   */
   function handleButtonInversionesClick(inversion) {
     const existeInversion = mesActual.inversiones.some((item) => item.id === inversion.id);
 
