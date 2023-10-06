@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { collection, doc, getDoc, getDocs, getFirestore } from 'firebase/firestore';
+import { collection, getDocs, getFirestore } from 'firebase/firestore';
 import { useParams, Link } from 'react-router-dom';
 import { getMesPorId } from '../mockApi';
 import useMisMeses from '../Hooks/useMisMeses';

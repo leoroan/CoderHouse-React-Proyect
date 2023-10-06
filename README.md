@@ -1,18 +1,4 @@
-
-
-# Consideraciones para entrega final:
-## Qué se pide: 
-* video con el funcionamiento de la app. (50sec aprox.) - en cuenta de esto hacer un deploy 
- -subirlo a un host gratuito (netlify)
-* Codigo debe estar optimizado
- - no debe haber codigo comentado
- - NO console.log()
- - eliminar el codigo inutil/innecesario
- - importaciones declaras no usadas / variables.
-* eliminar repetidos
-* diseño modular (modularizacion)
-
-## Libreria externas usadas + su version
+## Libreria externas usadas
  * bootstrap        | v5.3
  * Sweet Alert      | v--.-
  * react-bootstrap  | v
@@ -20,8 +6,6 @@
 
 ## DEPLOY -DEMO:
    Link_al_proyecto
-
-
 
 ## tips&hints
 # TIPS PARA CREAR UN PROY EN REACT + VITE
